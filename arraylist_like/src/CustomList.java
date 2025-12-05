@@ -4,7 +4,7 @@ public class CustomList {
     private Node head;
 
     public CustomList() { // empty
-
+        this.head = null;
     }
 
     public CustomList(Node newHead) { // starting from a node
@@ -21,5 +21,29 @@ public class CustomList {
             }
             now.setNext(newNode); // setto il nuovo nodo
         }
+    }
+
+    // funzione che chiama la printOut, per stampare tutto l'array
+    public void print() {
+        if (head != null) { // controllo che non sia vuota
+            System.out.print("[");
+            printOut(head); // chiamo la printOut, partendo dalla head
+            System.out.println("]");
+        } else { // vuota
+            System.out.println("[]");
+        }
+    }
+
+    public void printOut(Node current) {
+        // caso base
+        if (current.getNext() == null) { // so già che c'è solo quello attuale
+            System.out.print(current.getValue());
+            return;
+        }
+        
+        // valore inziale
+        System.out.print(current.getValue() + ", "); // stampo l'attuale con separatore
+        // chiamata ricorsiva
+        printOut(current.getNext()); 
     }
 }
