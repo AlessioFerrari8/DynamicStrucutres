@@ -7,5 +7,10 @@ public class App {
         two.setNext(three);
         CustomList c = new CustomList(head);
         c.print();
+
+        Node four = new Node(54);
+        c.append(four);
+        c.print();
+        
     }
 }

@@ -12,15 +12,24 @@ public class CustomList {
     }
 
     public void append(Node newNode) {
-        if (head == null) { // se si parte subito con un null pointer
-            head = newNode; // setto come primo il nuovo nodo
-        } else { // altrimenti
-            Node now = head; // metto il nodo attuale come head
-            while (now.getNext() != null) { // controllo fino a quando non trovo il null pointer
-                now = now.getNext(); // setto l'attuale
-            }
-            now.setNext(newNode); // setto il nuovo nodo
+        // caso base
+        if (head == null) {  // vuota
+            head = newNode;
+        } else { 
+            // chiamata ricorsiva
+            appendOut(head, newNode);
         }
+    }
+
+    private void appendOut(Node current, Node newNode) {
+        // caso base
+        if (current.getNext() == null) { // appena trovo l'ultimo nodo
+            current.setNext(newNode); // cambio il riferimento dell'ultimo nodo
+            return;
+        }
+        
+        // chiamata ricorsivo
+        appendOut(current.getNext(), newNode);
     }
 
     // funzione che chiama la printOut, per stampare tutto l'array
