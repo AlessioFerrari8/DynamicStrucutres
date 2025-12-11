@@ -32,6 +32,23 @@ public class CustomList {
         appendOut(current.getNext(), newNode);
     }
 
+    public void appendInterattiva(Node newNode) {
+        if (head == null) {
+            this.head = newNode;
+        }
+
+        Node cursor = head;
+
+        // last element
+        while (cursor.getNext() != null) {
+            cursor = cursor.getNext();
+        } 
+
+        // reached the end
+        cursor.setNext(newNode);
+
+    }
+
     // funzione che chiama la printOut, per stampare tutto l'array
     public void print() {
         if (head != null) { // controllo che non sia vuota
