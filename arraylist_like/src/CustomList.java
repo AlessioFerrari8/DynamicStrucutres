@@ -43,7 +43,24 @@ public class CustomList {
         }
     }
 
-    public void printOut(Node current) {
+    public void printIterattiva() {
+        // the first node
+        Node cursor = head;
+
+        System.out.print("[");
+
+        // till the last element
+        while(cursor != null) {
+            System.out.print(cursor.getValue() + " ");
+
+            // move to the next element
+            cursor = cursor.getNext();
+        }
+
+        System.out.println("]");
+    }
+
+    private void printOut(Node current) {
         // caso base
         if (current.getNext() == null) { // so già che c'è solo quello attuale
             System.out.print(current.getValue());
@@ -55,4 +72,6 @@ public class CustomList {
         // chiamata ricorsiva
         printOut(current.getNext()); 
     }
+
+
 }
