@@ -98,6 +98,11 @@ public class CustomList {
             return;
         }
 
+        // the node is added 
+        else if (index > 0 && index <= size()) {
+
+        }
+
         Node current = head;
         int i = 0;
         while (current != null) {
@@ -130,6 +135,25 @@ public class CustomList {
 
         // recursive call
         return sizeOut(cursor.getNext()) + 1;
+    }
+
+    public Node get(int index) throws IndexOutOfBoundsException {
+        // index valid
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        
+        return getOut(head, index);
+    }
+
+    private Node getOut(Node cursor, int index)  {
+        // exit clause
+        if (index == 0) {
+            return cursor;
+        }
+
+        // recursive
+        return getOut(cursor.getNext(), --index);
     }
 
 }
