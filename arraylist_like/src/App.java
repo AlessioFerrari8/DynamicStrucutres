@@ -11,6 +11,15 @@ public class App {
         Node four = new Node(54);
         c.append(four);
         c.print();
+
+        Node added = new Node(4);
+        c.add(0, added);
+        c.print();
+        
+        added = new Node(5);
+        c.add(4, added);
+        c.print();
+
         
     }
 }
