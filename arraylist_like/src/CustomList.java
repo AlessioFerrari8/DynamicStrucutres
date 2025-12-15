@@ -100,27 +100,35 @@ public class CustomList {
 
         // the node is added 
         else if (index > 0 && index <= size()) {
+            Node prev = get(index - 1);
 
+            newNode.setNext(prev.getNext());
+
+            prev.setNext(newNode);
         }
 
-        Node current = head;
-        int i = 0;
-        while (current != null) {
+        else {
+            throw new IndexOutOfBoundsException("Invalid position");
+        }
 
-            if (i == index - 1) {
-                newNode.setNext(current.getNext());
-                current.setNext(newNode);
-                break;
-            }
+        // Node current = head;
+        // int i = 0;
+        // while (current != null) {
 
-            if (current.getNext() == null) {
-                append(newNode);
-            }
+        //     if (i == index - 1) {
+        //         newNode.setNext(current.getNext());
+        //         current.setNext(newNode);
+        //         break;
+        //     }
+
+        //     if (current.getNext() == null) {
+        //         append(newNode);
+        //     }
                        
-            current = current.getNext();
-            i++;
-        }
-        head = newNode; // empty
+        //     current = current.getNext();
+        //     i++;
+        // }
+        // head = newNode; // empty
     }
 
     public int size() {
