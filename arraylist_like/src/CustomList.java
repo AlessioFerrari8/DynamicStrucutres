@@ -118,4 +118,18 @@ public class CustomList {
         head = newNode; // empty
     }
 
+    public int size() {
+        return sizeOut(head);
+    }
+
+    private int sizeOut(Node cursor) {
+        // exit clause
+        if (cursor == null) {
+            return 0;
+        } 
+
+        // recursive call
+        return sizeOut(cursor.getNext()) + 1;
+    }
+
 }
