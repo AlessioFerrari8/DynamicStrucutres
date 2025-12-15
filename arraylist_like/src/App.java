@@ -20,6 +20,10 @@ public class App {
         c.add(4, added);
         c.print();
 
+
+        c.remove(0);
+        c.print();
+
         
     }
 }

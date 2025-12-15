@@ -95,7 +95,6 @@ public class CustomList {
         if (index == 0) {
             newNode.setNext(head); // the next will be the actual head
             this.head = newNode; // the new node becomes the head 
-            return;
         }
 
         // the node is added 
@@ -163,5 +162,30 @@ public class CustomList {
         // recursive
         return getOut(cursor.getNext(), --index);
     }
+
+    public void remove(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+
+        // first element
+        if (index == 0) {
+            head = head.getNext(); // new head
+        }
+
+        // inside
+        else {
+            Node prev = get(index - 1);
+            Node removed = get(index);
+            prev.setNext(removed.getNext());
+        }
+
+    }
+
+    public void remove(Node remove) throws IndexOutOfBoundsException {
+        
+    }
+
+   
 
 }
