@@ -91,18 +91,25 @@ public class CustomList {
     }
 
     public void add(int index, Node newNode) throws IndexOutOfBoundsException {
+        // the node is before the head
+        if (index == 0) {
+            newNode.setNext(head); // the next will be the actual head
+            this.head = newNode; // the new node becomes the head 
+            return;
+        }
+
         Node current = head;
         int i = 0;
         while (current != null) {
-            if (i == index && i == 0) {
-                newNode.setNext(head);
-                break;
-            }
 
-            if (i >= 1 && i - 1 == index) {
+            if (i == index - 1) {
                 newNode.setNext(current.getNext());
                 current.setNext(newNode);
                 break;
+            }
+
+            if (current.getNext() == null) {
+                append(newNode);
             }
                        
             current = current.getNext();
