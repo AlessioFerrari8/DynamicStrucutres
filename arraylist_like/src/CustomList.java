@@ -163,13 +163,16 @@ public class CustomList {
         return getOut(cursor.getNext(), --index);
     }
 
-    public void remove(int index) throws IndexOutOfBoundsException {
+    public Node remove(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
 
+        Node toReturn;
+
         // first element
         if (index == 0) {
+            toReturn = head;
             head = head.getNext(); // new head
         }
 
@@ -177,9 +180,11 @@ public class CustomList {
         else {
             Node prev = get(index - 1);
             Node removed = get(index);
+            toReturn = removed;
             prev.setNext(removed.getNext());
         }
 
+        return toReturn;
     }
 
     public void remove(Node remove) throws IndexOutOfBoundsException {
