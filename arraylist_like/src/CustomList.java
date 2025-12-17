@@ -163,6 +163,12 @@ public class CustomList {
         return getOut(cursor.getNext(), --index);
     }
 
+    /**
+     * Removes a node from the list giving its position
+     * @param index position to delete
+     * @returnthe the removed node
+     * @throws IndexOutOfBoundsException
+     */
     public Node remove(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException("Invalid index");
@@ -179,17 +185,42 @@ public class CustomList {
         // inside
         else {
             Node prev = get(index - 1);
-            Node removed = get(index);
-            toReturn = removed;
-            prev.setNext(removed.getNext());
+            toReturn = get(index);
+            prev.setNext(toReturn.getNext());
         }
 
         return toReturn;
     }
+    
+    /**
+     * Remove a node from the list if present
+     * @param remove the node to be search and removed
+     * @return true if was removed, false otherwise
+     * @throws IndexOutOfBoundsException
+     */
+    public boolean remove(Node remove) throws IndexOutOfBoundsException {
+        Node current = head;
 
-    public void remove(Node remove) throws IndexOutOfBoundsException {
         
     }
+
+    public int indexOf(Node n) {
+        
+    }
+
+    public boolean removeOut(Node remove, Node current) {
+        if (current.equals(remove)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public Node remove() {
+
+    }
+
+
 
    
 
