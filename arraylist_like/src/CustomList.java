@@ -198,26 +198,57 @@ public class CustomList {
      * @return true if was removed, false otherwise
      * @throws IndexOutOfBoundsException
      */
-    public boolean remove(Node remove) throws IndexOutOfBoundsException {
+    public boolean remove(Node n) throws IndexOutOfBoundsException {
         Node current = head;
+        if (n == null) return false;
 
+        int index = indexOf(n);
+        if (index < 0) return false;
+        
+        return remove(index) != null;
         
     }
 
     public int indexOf(Node n) {
-        
-    }
+        Node cursor = head;
+        int index = 0;
 
-    public boolean removeOut(Node remove, Node current) {
-        if (current.equals(remove)) {
-            return true;
+        while (cursor != null) {
+            if (cursor.equals(n)) {
+                return index;
+            }
+
+            cursor = cursor.getNext();
+            index++;
         }
 
-        return false;
+        return -1;
+
     }
 
-    public Node remove() {
+    public void set(int index, Node n) {
+        Node current = head;
+        int c = 0;
 
+        while (c != index) {
+            c++;
+        }
+        n.setNext(current.getNext());
+        current = n;
+    }
+
+    public boolean contains(Node n) {
+        Node current = head;
+        while (!current.equals(n)) {
+            current = current.getNext();
+        }
+        if (current == null) {
+            return false;
+        }
+        
+        return true;
+
+        
     }
 
 
