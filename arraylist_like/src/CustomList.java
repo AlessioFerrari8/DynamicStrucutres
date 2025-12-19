@@ -11,6 +11,14 @@ public class CustomList {
         this.head = newHead; // the old head becomes the new
     }
 
+    public boolean isEmpty() {
+        return head == null;
+    }
+    
+    /**
+     * Adds a new node at the end of the list
+     * @param newNode new node to be added
+     */
     public void append(Node newNode) {
         // caso base
         if (head == null) {  // vuota
