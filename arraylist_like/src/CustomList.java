@@ -226,15 +226,40 @@ public class CustomList {
 
     }
 
-    public void set(int index, Node n) {
+    /**
+     * Overwrites a node with a new one, given its position
+     * @param index position of the old node
+     * @param newNode new node that replaces the old one
+     */
+    public void set(int index, Node newNode) throws IndexOutOfBoundsException, NullPointerException {
+        if (index < 0 || index >= size()) { // out of bounds
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+
+        // null
+        if (newNode == null) {
+            throw new NullPointerException("The Node must not be null"); // I like to consider it an "error"
+        }
+
+        // basic case
+        if (index == 0) {
+            newNode.setNext(head.getNext());
+            head = newNode;
+            return;
+        }
+
         Node current = head;
         int c = 0;
 
-        while (c != index) {
+        while (c != index - 1) { // till we reach the element
+            current = current.getNext(); 
             c++;
         }
-        n.setNext(current.getNext());
-        current = n;
+
+        // next node becomes the current next node
+        newNode.setNext(current.getNext().getNext());
+        // we set the actual newNode
+        current.setNext(newNode);
     }
 
     public boolean contains(Node n) {
@@ -256,6 +281,8 @@ public class CustomList {
         return false;
         
     }
+
+
 
 
    
