@@ -24,6 +24,11 @@ public class App {
         c.remove(0);
         c.print();
 
+        System.out.println(c.contains(new Node(57)));
+        System.out.println(c.contains(new Node(0)));
+        System.out.println(c.contains(new Node(4)));
+        System.out.println(c.contains(new Node(88)));
+
         
     }
 }

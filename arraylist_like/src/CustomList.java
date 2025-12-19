@@ -238,19 +238,24 @@ public class CustomList {
     }
 
     public boolean contains(Node n) {
+        // if null
+        if (n == null)
+            return false;
+
         Node current = head;
-        while (!current.equals(n)) {
+
+        // we continue through the arraylist
+        while (current != null) { // if not null
+            if (current.equals(n)) {
+                return true; // found it
+            }
             current = current.getNext();
         }
-        if (current == null) {
-            return false;
-        }
-        
-        return true;
 
+        // not found it
+        return false;
         
     }
-
 
 
    
