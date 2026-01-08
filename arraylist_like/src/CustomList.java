@@ -273,15 +273,29 @@ public class CustomList {
 
         // we continue through the arraylist
         while (current != null) { // if not null
-            if (current.equals(n)) {
+            if (current.equals(n)) 
                 return true; // found it
-            }
+            
             current = current.getNext();
         }
 
         // not found it
         return false;
         
+    }
+
+    public boolean cointainsRec(Node n) {
+        return containsOut(head, n);
+    }
+
+    private boolean containsOut(Node cursor, Node n) {
+        // exit clauses
+        if (cursor == null) return false;
+        if (cursor.equals(n)) return true;
+    
+
+        // recursive call
+        return containsOut(cursor.getNext(), n);
     }
 
 
