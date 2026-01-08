@@ -19,6 +19,9 @@ public class Stack {
      * @return content of the first node
      */
     public int head() {
+        if (isEmpty()) { // if it's empty
+            System.out.println("Stack vuoto");
+        }
         return top.getValue();
     }
 
@@ -27,6 +30,9 @@ public class Stack {
      * @return node removed
      */
     public Node pop() {
+        if (isEmpty()) {
+            System.out.println("Stack vuoto");
+        }
         Node removed = top;
         top = top.getNext();
         return removed;
@@ -36,9 +42,9 @@ public class Stack {
      * Adds a node to the top of the stack
      * @param newNode node to be added
      */
-    public void push(Node newNode) {
-        top.setNext(newNode);
-        top = newNode;
+    public void push(Node newNode) { // no need to check if it's null, since it would be the first
+        newNode.setNext(top); // top becomes the next
+        top = newNode; // new top
     }
 
 
