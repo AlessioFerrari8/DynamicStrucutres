@@ -256,18 +256,12 @@ public class CustomList {
             return;
         }
 
-        Node current = head;
-        int c = 0;
-
-        while (c != index - 1) { // till we reach the element
-            current = current.getNext(); 
-            c++;
-        }
+        Node prev = get(index - 1);
 
         // next node becomes the current next node
-        newNode.setNext(current.getNext().getNext());
+        newNode.setNext(prev.getNext().getNext());
         // we set the actual newNode
-        current.setNext(newNode);
+        prev.setNext(newNode);
     }
 
     public boolean contains(Node n) {
