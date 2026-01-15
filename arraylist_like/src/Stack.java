@@ -18,10 +18,8 @@ public class Stack {
      * Reads the first element's content
      * @return content of the first node
      */
-    public int head() {
-        if (isEmpty()) { // if it's empty
-            System.out.println("Stack vuoto");
-        }
+    public int head() throws NullPointerException {
+        if (isEmpty()) throw new NullPointerException();
         return top.getValue();
     }
 
@@ -30,11 +28,9 @@ public class Stack {
      * @return node removed
      */
     public Node pop() {
-        if (isEmpty()) {
-            System.out.println("Stack vuoto");
-        }
-        Node removed = top;
-        top = top.getNext();
+        if (isEmpty()) return null; // stack empty
+        Node removed = this.top;
+        this.top = top.getNext();
         return removed;
     }
 
