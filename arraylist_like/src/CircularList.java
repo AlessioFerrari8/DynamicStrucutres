@@ -11,35 +11,43 @@ public class CircularList {
         this.head = newHead;
         this.tail = newTail;
         this.tail.setNext(head);
+        this.head.setNext(this.tail); // for now we have also to set the tail, because if not it's null
     }
 
     public void print() {
-        if(this.head == null) {
-            System.out.println("[]");
+        if (this.head == null) {
+            System.out.print("[]");
             return;
         }
         Node cursor = this.head;
-        System.out.println("[");
+        System.out.print("[");
         do {
-            System.out.print(cursor.getValue() + ", ");
+            System.out.print(cursor.getValue());
             cursor = cursor.getNext();
+            if (cursor != this.head) { // controllo per mettere le virgole giuste
+                System.out.print(", ");
+            }
         } while (cursor != this.head);
         System.out.println("]");
     }
 
     public void printRec() {
-        System.out.println("[");
-        printOut(head);
-        System.out.print("]");
+        System.out.print("[");
+        // solo se non è empty
+        if (this.head != null) {
+            printOut(head);
+        }
+        System.out.println("]");
     }
 
     private void printOut(Node current) {
-        if (current.getNext() == head) { // arrivato all'ultimo elemento
-            System.out.println(current.getValue());
-            return; 
+        if (current == null) return; // for being sure we control the emptiness aniway
+        System.out.print(current.getValue());
+
+        if (current.getNext() != this.head) { // if iT doesn't arrive to the head
+            System.out.print(", ");
+            printOut(current.getNext());
         }
-        System.out.print(current.getValue() + ", ");
-        printOut(current.getNext());
     }
 
     private int size() {

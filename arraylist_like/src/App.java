@@ -37,7 +37,11 @@ public class App {
 
         // c.set(4, null);
         // c.print();
-        
+
+        CircularList c = new CircularList(new Node(0), new Node(54));
+        c.print();
+        c.printRec();
+
         
     }
 }
