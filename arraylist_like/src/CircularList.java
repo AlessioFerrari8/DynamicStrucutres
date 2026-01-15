@@ -19,10 +19,27 @@ public class CircularList {
             return;
         }
         Node cursor = this.head;
+        System.out.println("[");
         do {
-            System.out.println(cursor);
+            System.out.print(cursor.getValue() + ", ");
             cursor = cursor.getNext();
         } while (cursor != this.head);
+        System.out.println("]");
+    }
+
+    public void printRec() {
+        System.out.println("[");
+        printOut(head);
+        System.out.print("]");
+    }
+
+    private void printOut(Node current) {
+        if (current.getNext() == head) { // arrivato all'ultimo elemento
+            System.out.println(current.getValue());
+            return; 
+        }
+        System.out.print(current.getValue() + ", ");
+        printOut(current.getNext());
     }
 
     private int size() {
