@@ -103,7 +103,40 @@ public class CircularList {
         return cursor;
     }
 
-    public 
+    public void newRing(Node n1, Node n2) {
+        boolean presentePrimo = false;
+        boolean presenteSecondo = false;
+        Node cursor = this.head;
+        // obiettivo: trovare se ci sono i due nodi
+        while (cursor.getNext() != this.head) { 
+            // trovo se ci sono n1 e n2
+            if (cursor.getNext() == n1) {
+                presentePrimo = true;
+            }
+            if (cursor.getNext() == n2) {
+                presenteSecondo = true;
+            }
+            cursor = cursor.getNext();
+        }
+        // casi
+        if (presentePrimo && presenteSecondo) {
+            // tutti e due presenti
+            this.head = n1;
+            this.head.setNext(n2);
+            this.tail = n2;
+        } else if (presentePrimo && presenteSecondo == false) {
+            this.head = n1;
+            
+        } else if (presentePrimo == false && presenteSecondo) { 
+            
+        } else if (presentePrimo == false && presenteSecondo == false) {
+            this.tail.setNext(n1);
+            n1.setNext(n2);
+            n2.setNext(this.head);
+            this.head = n1;
+            this.tail = n2;
+        }
+    }
 
 
 
