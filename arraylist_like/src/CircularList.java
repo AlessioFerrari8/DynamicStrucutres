@@ -94,4 +94,19 @@ public class CircularList {
         return (size() - c);
     }
 
+    public Node getPrev(Node n) {
+        Node cursor = head;
+        while (cursor.getNext() != n) { // trovo il precedente del nodo corrente
+            cursor = cursor.getNext();
+        }
+        // now I know the precedent
+        return cursor;
+    }
+
+    public 
+
+
+
+
+
 }
