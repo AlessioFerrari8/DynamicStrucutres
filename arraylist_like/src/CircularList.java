@@ -14,11 +14,15 @@ public class CircularList {
     }
 
     public void print() {
+        if(this.head == null) {
+            System.out.println("[]");
+            return;
+        }
         Node cursor = this.head;
-        for(int i = 0; i < size(); i++) {
+        do {
             System.out.println(cursor);
             cursor = cursor.getNext();
-        }
+        } while (cursor != this.head);
     }
 
     private int size() {
@@ -26,9 +30,10 @@ public class CircularList {
             return 0;
         }
         Node cursor = this.head;
-        int c = 0;
+        int c = 1;
         while(cursor.getNext() != this.head) {
             c++;
+            cursor = cursor.getNext();
         }
         return c;
     } 
@@ -85,12 +90,8 @@ public class CircularList {
             c++;
         }
         // now I know the node in index last
-        
+        this.tail = cursor;
+        return (size() - c);
     }
-
-
-
-
-
 
 }
