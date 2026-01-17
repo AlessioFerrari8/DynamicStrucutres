@@ -2,7 +2,7 @@ public class CircularList {
     private Node head;
     private Node tail;
 
-    public CircularList() {
+    public CircularList() { // null
         this.head = null;
         this.tail = null;
     }
@@ -21,19 +21,19 @@ public class CircularList {
         }
         Node cursor = this.head;
         System.out.print("[");
-        do {
+        do { // at first I have to iterate because I print the head
             System.out.print(cursor.getValue());
             cursor = cursor.getNext();
-            if (cursor != this.head) { // controllo per mettere le virgole giuste
+            if (cursor != this.head) { // commas between the elements
                 System.out.print(", ");
             }
-        } while (cursor != this.head);
-        System.out.println("]");
+        } while (cursor != this.head); // till I reach the end
+        System.out.println("]"); // close 
     }
 
-    public void printRec() {
+    public void printRec() { // recursive
         System.out.print("[");
-        // solo se non è empty
+        // empty
         if (this.head != null) {
             printOut(head);
         }
@@ -44,10 +44,45 @@ public class CircularList {
         if (current == null) return; // for being sure we control the emptiness aniway
         System.out.print(current.getValue());
 
-        if (current.getNext() != this.head) { // if iT doesn't arrive to the head
+        if (current.getNext() != this.head) { // if it doesn't arrive to the head
             System.out.print(", ");
             printOut(current.getNext());
         }
+    }
+
+    // I like it to return the Node I added, so if it's null I know it hasn't added anything
+    public Node add(Node newNode, int index) {
+        if(head == null) { // 
+            if (index != 0) return null; // can't add anything
+            this.head = newNode;
+            newNode.setNext(newNode); // points to itself
+            return newNode;
+        }
+
+        if (index == 0) { // head
+            Node cursor = head;
+            while (cursor.getNext() != head) {
+                cursor = cursor.getNext();
+            }
+            cursor.setNext(newNode); // tails point at the new head
+            newNode.setNext(this.head); // the new head point at the old head
+            this.head = newNode; // update the head reference
+            return newNode;
+        }
+
+        // iterate on the list to search the previous item
+        Node current = this.head;
+        int c = 0;
+        while (c < index-1) {
+            current = current.getNext();
+            c++;
+        }
+        // now i have the precedent
+        // set the next
+        newNode.setNext(current.getNext());
+        // set the precedent
+        current.setNext(newNode);
+        return newNode;
     }
 
     private int size() {
