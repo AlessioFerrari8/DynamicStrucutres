@@ -103,9 +103,10 @@ public class CircularList {
         if (this.head == null) {
             return false;
         }
+
         // checks if there's any null
         Node cursor = this.head;
-        for(int i = 0; i < size(); i++) {
+        for(int i = 0; i < size() - 1; i++) {
             if (cursor.getNext() == null) {
                 return false;
             }
@@ -116,26 +117,42 @@ public class CircularList {
     }
 
     public int removeRange(int start, int end) throws Exception {
-        if (end < start) throw new Exception("Wrong indexes");
-        if (head == null) throw new Exception("The list is null");
-        if (end == start) throw new Exception("Fucking dumbuss, it doesn't" + 
-        "make sense with the same index");
+        // invalid index
+        if (end < start) throw new Exception("Indexes not allowed");
+        if (head == null) throw new Exception("The list is null"); 
+        if (start < 0 || end < 0) throw new Exception("No negative indexes");
+        if (end == start) return 0; // nothing to remove
+
+
         int removedNodes = 0;
+
+        Node previous = null;
         Node cursor = this.head;
-        int firstElement = 0;
-        while (start != firstElement) {
+        int current = 0;
+
+        // I reach the node with index start - 1
+        while (cursor != null && current < start) {
+            previous = cursor;
             cursor = cursor.getNext();
-            firstElement++;
-        }
-        // adesso cursor è il start
-        Node start_Node = cursor;
-        int lastElement = firstElement;
-        while (end != lastElement) {
+            current++;
+        } 
+
+        if (cursor == null) throw new Exception("Problem");
+
+        // now cursor is in position start
+        // now I have to count the nodes to remove
+
+        while (cursor != null && current < end) {
             cursor = cursor.getNext();
-            lastElement++;
+            current++;
+            removedNodes++;
         }
-        start_Node.setNext(cursor);
-        removedNodes = end - start;
+
+        // I just cut the part of the list
+        if (previous != null) {
+            previous.setNext(cursor);
+        }
+
         return removedNodes;
     }
 
