@@ -49,8 +49,11 @@ public class App {
         c.print();
         // c.removeRange(1, 2);
         // c.print();
-        c.cut(4);
+        c.cut(3);
         c.print();
-        
+        Node n = new Node(67);
+        c.add(n, 2);
+        c.print();
+        System.out.println(c.getPrev(n));
     }
 }

@@ -195,12 +195,18 @@ public class CircularList {
         return removed;
     }
 
-    public Node getPrev(Node n) {
-        Node cursor = head;
-        while (cursor.getNext() != n) { // trovo il precedente del nodo corrente
-            cursor = cursor.getNext();
+    public Node getPrev(Node n) throws Exception {
+        if (this.head == null) throw new Exception("Null list");
+        if (head == n) {
+            return null;  
         }
-        // now I know the precedent
+    
+        Node cursor = head;
+        while (cursor.getNext() != n) {
+            cursor = cursor.getNext();
+            if (cursor == this.head) throw new Exception("Node not found");
+        }
+                
         return cursor;
     }
 
