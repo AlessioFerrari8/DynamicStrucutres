@@ -142,7 +142,7 @@ public class CircularList {
         // now cursor is in position start
         // now I have to count the nodes to remove
 
-        while (cursor != null && current < end) {
+        while (cursor != null && current <= end) {
             cursor = cursor.getNext();
             current++;
             removedNodes++;
@@ -157,18 +157,42 @@ public class CircularList {
     }
 
     public int cut(int last) throws Exception {
-        if (last == 0) {
-            head = this.tail;
+        if (head == null) throw new Exception("List null");
+        if (last < 0) throw new Exception("Negative indexes not allowed");
+        if (last == 0) { // it means empty the list
+            int removed = size();
+            this.head = null;
+            this.tail = null;
+            return removed;
         }
+
         int c = 0;
         Node cursor = head;
+        Node previous = null;
+
         while (c < last) {
+            previous = cursor;
             cursor = cursor.getNext();
             c++;
+            if (cursor == head) throw new Exception("Index out of bounds");
+            
         }
+
+        if (cursor == null) return 0; // last is beyond the length
+
         // now I know the node in index last
-        this.tail = cursor;
-        return (size() - c);
+        if (previous != null) {
+            previous.setNext(head);  // point to head
+            this.tail = previous;    // new tail
+        }
+
+        int removed = 0;
+        Node current = cursor;
+        while (current != this.tail) {
+            current = current.getNext();
+            removed++;
+        }
+        return removed;
     }
 
     public Node getPrev(Node n) {

@@ -41,7 +41,16 @@ public class App {
         CircularList c = new CircularList(new Node(0), new Node(54));
         c.print();
         c.printRec();
-
+        c.add(new Node(1), 1);
+        c.print();
+        c.add(new Node(58), 3);
+        c.print();
+        System.out.println(c.checkRing());
+        c.print();
+        // c.removeRange(1, 2);
+        // c.print();
+        c.cut(4);
+        c.print();
         
     }
 }
