@@ -54,6 +54,9 @@ public class App {
         Node n = new Node(67);
         c.add(n, 2);
         c.print();
-        System.out.println(c.getPrev(n));
+        Node prev = c.getPrev(n);
+        System.out.println(prev.getValue());
+        c.newRing(new Node(1), new Node(67));
+        c.print();
     }
 }

@@ -198,8 +198,9 @@ public class CircularList {
     public Node getPrev(Node n) throws Exception {
         if (this.head == null) throw new Exception("Null list");
         if (head == n) {
-            return null;  
+            return this.tail;  
         }
+
     
         Node cursor = head;
         while (cursor.getNext() != n) {
@@ -211,42 +212,91 @@ public class CircularList {
     }
 
     public void newRing(Node n1, Node n2) {
+        if (n1 == null || n2 == null) return;
+
         boolean presentePrimo = false;
         boolean presenteSecondo = false;
+
+        if (this.head == null) { // empty
+            this.head = n1;
+            n1.setNext(n2);
+            n2.setNext(n1);
+            this.tail = n2;
+            return;
+        }
+
         Node cursor = this.head;
-        // obiettivo: trovare se ci sono i due nodi
-        while (cursor.getNext() != this.head) { 
-            // trovo se ci sono n1 e n2
-            if (cursor.getNext() == n1) {
+
+        // I have to do a do while because if not I could skip the last element
+        do {
+            if (cursor == n1) {
                 presentePrimo = true;
             }
-            if (cursor.getNext() == n2) {
+            if (cursor == n2) {
                 presenteSecondo = true;
             }
             cursor = cursor.getNext();
-        }
+        } while (cursor != this.head);
+
         // casi
         if (presentePrimo && presenteSecondo) {
-            // tutti e due presenti
+            // n1 new head with n2 next
             this.head = n1;
-            this.head.setNext(n2);
-            this.tail = n2;
-        } else if (presentePrimo && presenteSecondo == false) {
-            this.head = n1;
+            n1.setNext(n2);
             
-        } else if (presentePrimo == false && presenteSecondo) { 
+            // I have to update the node before n2
+            Node temp = n2;
+            while (temp.getNext() != n2) {
+                temp = temp.getNext();
+            }
+            temp.setNext(this.head);
+        
+        } else if (presentePrimo && !presenteSecondo) {
+            // n1 in the list
+            Node temp = n1.getNext();
+            n1.setNext(n2);
+            n2.setNext(temp);
             
-        } else if (presentePrimo == false && presenteSecondo == false) {
+            if (this.tail == n1) {
+                this.tail = n2;
+            }
+            
+        } else if (!presentePrimo && presenteSecondo) {
+            // n2 in the list
+            Node temp = this.head;
+            Node prev = null;
+            
+            // Find the node before n2
+            do {
+                if (temp.getNext() == n2) {
+                    prev = temp;
+                    break;
+                }
+                temp = temp.getNext();
+            } while (temp != this.head);
+            
+            if (prev != null) {
+                prev.setNext(n1);
+                n1.setNext(n2);
+            } else if (this.head == n2) {
+                // n2 is the head
+                n1.setNext(n2);
+                this.head = n1;
+                this.tail.setNext(n1);
+            }
+            
+        } else {
+            // no nodes present
+            // I add them at the beginning
             this.tail.setNext(n1);
             n1.setNext(n2);
             n2.setNext(this.head);
             this.head = n1;
-            this.tail = n2;
         }
     }
-
-
-
-
-
 }
+
+
+
+
+
